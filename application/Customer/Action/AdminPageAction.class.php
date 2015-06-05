@@ -44,7 +44,7 @@ class AdminPageAction extends AdminbaseAction {
 		$where= join(" and ", $where_ands);
 		
 		$count=$this->_obj->where($where)->count();
-		$page = $this->page($count, 20);
+		$page = $this->page($count, C('ADMIN_PAGE_NUM',null,20));
 		
 		$posts=$this->_obj->where($where)->limit($page->firstRow . ',' . $page->listRows)->select();
 				

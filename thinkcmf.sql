@@ -725,3 +725,14 @@ INSERT INTO `sp_users` (`id`, `user_login`, `user_pass`, `user_nicename`, `user_
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE `sp_customer` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `real_name` varchar(20) DEFAULT NULL COMMENT '姓名',
+   `mobile` varchar(100) DEFAULT NULL COMMENT '手机',
+   `idcard` varchar(50) DEFAULT NULL COMMENT '省份证',
+   `address` varchar(500) DEFAULT NULL COMMENT '地址',
+   `post_author` varchar(200) DEFAULT NULL COMMENT '发布人',
+   `post_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '发布时间',
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;

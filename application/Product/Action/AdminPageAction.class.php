@@ -1,11 +1,11 @@
 <?php
-namespace Customer\Action;
+namespace Product\Action;
 use Common\Action\AdminbaseAction;
 class AdminPageAction extends AdminbaseAction {
 	protected $_obj;
 	function _initialize() {
 		parent::_initialize();
-		$this->_obj =D("Customer");
+		$this->_obj =D("Product");
 	}
 	function index(){
 		
@@ -44,7 +44,8 @@ class AdminPageAction extends AdminbaseAction {
 		$where= join(" and ", $where_ands);
 		
 		$count=$this->_obj->where($where)->count();
-		$page = $this->page($count, 20);
+		
+		$page = $this->page($count, C('ADMIN_PAGE_NUM',null,20));
 		
 		$posts=$this->_obj->where($where)->limit($page->firstRow . ',' . $page->listRows)->select();
 				

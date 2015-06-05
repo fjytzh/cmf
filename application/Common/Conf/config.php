@@ -59,6 +59,7 @@ $configs= array(
 		'VAR_PAGE'				=>"p",
 		
 		'URL_ROUTER_ON'			=> true,
+		'ADMIN_PAGE_NUM'		=> 13,
 		
 		/*性能优化*/
 		
