@@ -1,0 +1,73 @@
+<admintpl file="header" />
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li class="active"><a href="{:U('AdminPage/index')}">所有客户</a></li>
+     <li><a href="{:U('AdminPage/add')}">添加客户</a></li>
+  </ul>
+  <form class="well form-search" method="post" action="{:u('AdminPage/index')}">
+    <div class="search_type cc mb10">
+      <div class="mb10"> 
+        <span class="mr20">姓名：
+        <input type="text" class="input length_2" name="real_name" style="width:200px;" value="{$formget.real_name}" placeholder="请输入姓名...">
+                           手机号码：
+        <input type="text" class="input length_2" name="mobile" style="width:200px;" value="{$formget.mobile}" placeholder="请输入手机号码...">
+        <button class="btn">搜索</button>
+        </span>
+      </div>
+    </div>
+  </form>
+  <form class="J_ajaxForm" action="" method="post">
+    <div class="table_list">
+      <table width="100%" class="table table-hover">
+        <thead>
+	          <tr>
+	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+	            <th width="100">ID</th>
+	            <th width="80">姓名</th>
+	            <th width="80">手机</th>
+	            <th width="120">身份证</th>
+	            <th width="120">发布时间</th>
+	            <th width="120">操作</th>
+	          </tr>
+	    </thead>
+        	<foreach name="posts" item="vo">
+	        	<tr>
+		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}"></td>
+		            <td><a>{$vo.id}</a></td>
+		            <td>{$vo.real_name}</td>
+		            <td>{$vo.mobile}</td>
+		            <td>{$vo.idcard}</td>
+		            <th>{$vo.post_date}</th>
+		            <td>
+		            	<a href="{:U('AdminPage/edit',array('id'=>$vo['id']))}" target="_blank" >修改</a>|
+		            	<a href="{:U('AdminPage/delete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
+					</td>
+	          	</tr>
+          </foreach>
+          </table>
+      		<div class="pagination">{$Page}</div>
+     
+    </div>
+    <div class="form-actions">
+        <label class="checkbox inline" for="check_all"><input type="checkbox" class="J_check_all" data-direction="y" data-checklist="J_check_y" id="check_all">全选</label>                
+        <button class="btn J_ajax_submit_btn btn-primary" type="submit" data-action="{:U('AdminPage/clean')}" data-subcheck="true">删除</button>
+      </div>
+  </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+setCookie('refersh_time', 0);
+function refersh_window() {
+    var refersh_time = getCookie('refersh_time');
+    if (refersh_time == 1) {
+        window.location.reload();
+    }
+}
+setInterval(function(){
+	refersh_window()
+}, 2000);
+
+</script>
+</body>
+</html>

@@ -14,7 +14,7 @@ $configs= array(
 		/* 标签库 */
 		'TAGLIB_BUILD_IN' => 'cx,Common\Lib\Taglib\TagLibSpadmin,Common\Lib\Taglib\TagLibHome',
 		//'APP_GROUP_LIST'        => 'Admin,Portal,Asset,Api,Member,Wx,Toptic,Strap',      // 项目分组设定,多个组之间用逗号分隔,例如'Home,Admin'
-		'MODULE_ALLOW_LIST'  => array('Admin','Portal','Asset','Api','User','Comment'),
+		'MODULE_ALLOW_LIST'  => array('Admin','Portal','Asset','Api','User','Comment','Customer'),
  		'TMPL_DETECT_THEME'     => false,       // 自动侦测模板主题
  		'TMPL_TEMPLATE_SUFFIX'  => '.html',     // 默认模板文件后缀
 		'DEFAULT_MODULE'        =>  'Portal',  // 默认模块

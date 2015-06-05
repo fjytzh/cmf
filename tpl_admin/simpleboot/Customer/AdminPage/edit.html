@@ -1,0 +1,66 @@
+<admintpl file="header"/>
+<style type="text/css">
+.col-auto {
+	overflow: hidden;
+	_zoom: 1;
+	_float: left;
+	border: 1px solid #c2d1d8;
+}
+.col-right {
+	float: right;
+	width: 210px;
+	overflow: hidden;
+	margin-left: 6px;
+	border: 1px solid #c2d1d8;
+}
+
+body fieldset {
+	border: 1px solid #D8D8D8;
+	padding: 10px;
+	background-color: #FFF;
+}
+body fieldset legend {
+    background-color: #F9F9F9;
+    border: 1px solid #D8D8D8;
+    font-weight: 700;
+    padding: 3px 8px;
+}
+</style>
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li><a href="{:U('AdminPage/index')}">所有页面</a></li>
+     <li class="active"><a href="{:U('AdminPage/edit')}">添加页面</a></li>
+  </ul>
+  <form name="myform" id="myform"  action="{:U('AdminPage/edit_post')}" method="post" class="form-horizontal J_ajaxForms">
+  <input type="hidden" name="post[post_author]" value="{$post.post_author}">
+  <input type="hidden" name="post[id]" value="{$post.id}">
+  <div class="col-auto">
+    <div class="table_full">
+      <table width="100%" cellpadding="2" cellspacing="2">
+            <tr>
+              <th width="80">姓名</th>
+              <td><input type='text' name='post[real_name]' id='real_name' value='{$post.real_name}' style='width:280px' class='input' > </td>
+            </tr>
+            <tr>
+              <th width="80">手机 </th>
+              <td><input type='text' name='post[mobile]' id='mobile' value='{$post.mobile}' style='width:280px' class='input' > </td>
+            </tr>
+            <tr>
+              <th width="80">身份证 </th>
+              <td><input type='text' name='post[idcard]' id='idcard' value='{$post.idcard}' style='width:280px' class='input' > </td>
+            </tr>    
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-actions">
+        <button class="btn btn_submit J_ajax_submit_btn"type="submit">提交</button>
+        <a class="btn" href="__URL__">返回</a>
+  </div>
+ </form>
+</div>
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+</body>
+</html>
