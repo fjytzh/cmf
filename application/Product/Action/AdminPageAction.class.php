@@ -11,8 +11,7 @@ class AdminPageAction extends AdminbaseAction {
 		
 		$where_ands=array();
 		$fields=array(
-				'real_name'  => array("field"=>"real_name","operator"=>"like"),
-				'mobile'  => array("field"=>"mobile","operator"=>"like"),
+			'p_name'  => array("field"=>"p_name","operator"=>"like"),
 		);
 		if(IS_POST){
 			foreach ($fields as $param =>$val){
@@ -61,13 +60,18 @@ class AdminPageAction extends AdminbaseAction {
 	
 	function add_post(){
 		if (IS_POST) {
+			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
 			$_POST['post']['post_date']=date("Y-m-d H:i:s",time());
 			$_POST['post']['post_author']=get_current_admin_id();
+			$_POST['post']['smeta']=json_encode($_POST['smeta']);
+			$_POST['post']['num]'] = $_POST['post']['total_num'];
 			$result=$this->_obj->add($_POST['post']);
+			print_r($result);
+			exit;
 			if ($result) {
-				$this->success("添加成功！");
+				//$this->success("添加成功！");
 			} else {
-				$this->error("添加失败！");
+				//$this->error("添加失败！");
 			}
 		}
 	}
@@ -124,6 +128,32 @@ class AdminPageAction extends AdminbaseAction {
 		}
 	}
 	
+	function addnum(){
+		$id = intval(I('id'));
+		$post=$this->_obj->where("id=$id")->find();
+		$this->assign("post",$post);
+        $this->display();
+	}
+	
+	function addnum_post(){
+		if (IS_POST) {
+			$id = intval(I('id'));
+			$post=$this->_obj->where("id=$id")->find();
+			
+			$update_arr = array();
+			$update_arr['num'] = $post['num'] + $_POST['post']['add_num'];
+			$update_arr['total_num'] = $post['total_num'] +  $_POST['post']['add_num'];
+			$result=$this->_obj->save($update_arr);
+			
+			if ($result !== false) {
+				//
+				$this->success("保存成功！");
+				//$this->success(json_encode($_POST['meta']));
+			} else {
+				$this->error("保存失败！");
+			}
+		}
+	}
 	
 	
 }

@@ -126,9 +126,11 @@ class AdminPageAction extends AdminbaseAction {
 	
 	function add_post(){
 		if (IS_POST) {
-			$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
+			if($_POST['smeta']['thumb']){
+				$_POST['smeta']['thumb'] = sp_asset_relative_url($_POST['smeta']['thumb']);
+				$_POST['post']['smeta']=json_encode($_POST['smeta']);
+			}
 			$_POST['post']['post_date']=date("Y-m-d H:i:s",time());
-			$_POST['post']['smeta']=json_encode($_POST['smeta']);
 			$_POST['post']['post_author']=get_current_admin_id();
 			$result=$this->posts_obj->add($_POST['post']);
 			if ($result) {

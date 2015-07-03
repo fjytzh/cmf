@@ -2,16 +2,14 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
   <ul class="nav nav-tabs">
-     <li class="active"><a href="{:U('AdminPage/index')}">所有客户</a></li>
-     <li><a href="{:U('AdminPage/add')}">添加客户</a></li>
+     <li class="active"><a href="{:U('AdminPage/index')}">产品列表</a></li>
+     <li><a href="{:U('AdminPage/add')}">添加新产品</a></li>
   </ul>
   <form class="well form-search" method="post" action="{:u('AdminPage/index')}">
     <div class="search_type cc mb10">
       <div class="mb10"> 
-        <span class="mr20">姓名：
-        <input type="text" class="input length_2" name="real_name" style="width:200px;" value="{$formget.real_name}" placeholder="请输入姓名...">
-                           手机号码：
-        <input type="text" class="input length_2" name="mobile" style="width:200px;" value="{$formget.mobile}" placeholder="请输入手机号码...">
+        <span class="mr20">名称：
+        <input type="text" class="input length_2" name="p_name" style="width:200px;" value="{$formget.p_name}" placeholder="请输入名称...">
         <button class="btn">搜索</button>
         </span>
       </div>
@@ -23,26 +21,31 @@
         <thead>
 	          <tr>
 	            <th width="16"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
-	            <th width="100">ID</th>
-	            <th width="80">姓名</th>
-	            <th width="80">手机</th>
-	            <th width="120">身份证</th>
-	            <th width="300">地址</th>
-	            <th width="120">发布时间</th>
-	            <th width="120">操作</th>
+	            <th width="50">ID</th>
+	            <th width="150">名称</th>
+	            <th width="80">型号</th>
+	            <th width="80">规格</th>
+	            <th width="100">品牌</th>
+	            <th width="100">价格</th>
+	            <th width="100">剩余数量</th>
+	      		<th width="100">总数</th> 
+	            <th width="150">操作</th>
 	          </tr>
 	    </thead>
         	<foreach name="posts" item="vo">
 	        	<tr>
 		            <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}"></td>
 		            <td><a>{$vo.id}</a></td>
-		            <td>{$vo.real_name}</td>
-		            <td>{$vo.mobile}</td>
-		            <td>{$vo.idcard}</td>
-		            <td>{$vo.address}</td>
-		            <th>{$vo.post_date}</th>
+		            <td>{$vo.p_name}</td>
+		            <td>{$vo.p_model}</td>
+		            <td>{$vo.p_format}</td>
+		            <td>{$vo.brand}</td>
+		            <td>{$vo.price}</td>
+		            <td>{$vo.num}</td>
+		            <td>{$vo.total_num}</td>
 		            <td>
 		            	<a href="{:U('AdminPage/edit',array('id'=>$vo['id']))}" target="_blank" >修改</a>|
+		            	<a href="{:U('AdminPage/addnum',array('id'=>$vo['id']))}" >进货</a>|
 		            	<a href="{:U('AdminPage/delete',array('id'=>$vo['id']))}" class="J_ajax_del" >删除</a>
 					</td>
 	          	</tr>
