@@ -13,6 +13,8 @@ MySQL - 5.5.32 : Database - cmf
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*Table structure for table `sp_access` */
 
+DROP TABLE IF EXISTS `sp_access`;
+
 CREATE TABLE `sp_access` (
   `role_id` smallint(6) unsigned NOT NULL,
   `g` varchar(20) NOT NULL COMMENT '项目',
@@ -26,6 +28,8 @@ CREATE TABLE `sp_access` (
 
 /*Table structure for table `sp_ad` */
 
+DROP TABLE IF EXISTS `sp_ad`;
+
 CREATE TABLE `sp_ad` (
   `ad_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '广告id',
   `ad_name` varchar(255) NOT NULL,
@@ -38,6 +42,8 @@ CREATE TABLE `sp_ad` (
 /*Data for the table `sp_ad` */
 
 /*Table structure for table `sp_asset` */
+
+DROP TABLE IF EXISTS `sp_asset`;
 
 CREATE TABLE `sp_asset` (
   `aid` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -56,6 +62,8 @@ CREATE TABLE `sp_asset` (
 /*Data for the table `sp_asset` */
 
 /*Table structure for table `sp_comments` */
+
+DROP TABLE IF EXISTS `sp_comments`;
 
 CREATE TABLE `sp_comments` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -83,6 +91,8 @@ CREATE TABLE `sp_comments` (
 /*Data for the table `sp_comments` */
 
 /*Table structure for table `sp_common_action_log` */
+
+DROP TABLE IF EXISTS `sp_common_action_log`;
 
 CREATE TABLE `sp_common_action_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -112,6 +122,8 @@ insert  into `sp_common_action_log`(`id`,`user`,`object`,`action`,`count`,`last_
 insert  into `sp_common_action_log`(`id`,`user`,`object`,`action`,`count`,`last_time`,`ip`) values (11,0,'posts9','Portal-Article-index',1,1415590666,'127.0.0.1');
 
 /*Table structure for table `sp_customer` */
+
+DROP TABLE IF EXISTS `sp_customer`;
 
 CREATE TABLE `sp_customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -180,6 +192,8 @@ insert  into `sp_customer`(`id`,`real_name`,`mobile`,`idcard`,`address`,`post_au
 
 /*Table structure for table `sp_guestbook` */
 
+DROP TABLE IF EXISTS `sp_guestbook`;
+
 CREATE TABLE `sp_guestbook` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(50) NOT NULL COMMENT '留言者姓名',
@@ -194,6 +208,8 @@ CREATE TABLE `sp_guestbook` (
 /*Data for the table `sp_guestbook` */
 
 /*Table structure for table `sp_links` */
+
+DROP TABLE IF EXISTS `sp_links`;
 
 CREATE TABLE `sp_links` (
   `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -215,6 +231,8 @@ CREATE TABLE `sp_links` (
 insert  into `sp_links`(`link_id`,`link_url`,`link_name`,`link_image`,`link_target`,`link_description`,`link_status`,`link_rating`,`link_rel`,`listorder`) values (1,'http://www.thinkcmf.com','ThinkCMF','','_blank','',1,0,'',0);
 
 /*Table structure for table `sp_menu` */
+
+DROP TABLE IF EXISTS `sp_menu`;
 
 CREATE TABLE `sp_menu` (
   `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
@@ -393,6 +411,8 @@ insert  into `sp_menu`(`id`,`parentid`,`app`,`model`,`action`,`data`,`type`,`sta
 
 /*Table structure for table `sp_nav` */
 
+DROP TABLE IF EXISTS `sp_nav`;
+
 CREATE TABLE `sp_nav` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cid` int(11) NOT NULL,
@@ -426,6 +446,8 @@ insert  into `sp_nav`(`id`,`cid`,`parentid`,`label`,`target`,`href`,`icon`,`stat
 
 /*Table structure for table `sp_nav_cat` */
 
+DROP TABLE IF EXISTS `sp_nav_cat`;
+
 CREATE TABLE `sp_nav_cat` (
   `navcid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -441,6 +463,8 @@ insert  into `sp_nav_cat`(`navcid`,`name`,`active`,`remark`) values (4,'产品�
 insert  into `sp_nav_cat`(`navcid`,`name`,`active`,`remark`) values (5,'公司动态',0,'公司动态');
 
 /*Table structure for table `sp_oauth_user` */
+
+DROP TABLE IF EXISTS `sp_oauth_user`;
 
 CREATE TABLE `sp_oauth_user` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
@@ -463,6 +487,8 @@ CREATE TABLE `sp_oauth_user` (
 
 /*Table structure for table `sp_options` */
 
+DROP TABLE IF EXISTS `sp_options`;
+
 CREATE TABLE `sp_options` (
   `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `option_name` varchar(64) NOT NULL DEFAULT '',
@@ -478,6 +504,8 @@ insert  into `sp_options`(`option_id`,`option_name`,`option_value`,`autoload`) v
 insert  into `sp_options`(`option_id`,`option_name`,`option_value`,`autoload`) values (2,'site_options','{\"site_name\":\"\\u6211\\u7684\\u4e2a\\u4eba\\u7f51\\u7ad9\",\"site_host\":\"http:\\/\\/localhost\\/cmf\\/\",\"site_root\":\"\\/\",\"site_tpl\":\"bs\",\"site_adminstyle\":\"bluesky\",\"site_icp\":\"\",\"site_admin_email\":\"admin@qq.com\",\"site_tongji\":\"\",\"site_copyright\":\"\",\"site_seo_title\":\"\\u5efa\\u7b51\\u4f01\\u4e1a\\u7ad9\\u6a21\\u677f\",\"site_seo_keywords\":\"\\u5efa\\u7b51\\u4f01\\u4e1a\\u7ad9\\u6a21\\u677f\",\"site_seo_description\":\"\\u5efa\\u7b51\\u4f01\\u4e1a\\u7ad9\\u6a21\\u677f\",\"urlmode\":\"1\",\"html_suffix\":\"\"}',1);
 
 /*Table structure for table `sp_posts` */
+
+DROP TABLE IF EXISTS `sp_posts`;
 
 CREATE TABLE `sp_posts` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -521,6 +549,8 @@ insert  into `sp_posts`(`id`,`post_author`,`post_keywords`,`post_date`,`post_con
 
 /*Table structure for table `sp_product` */
 
+DROP TABLE IF EXISTS `sp_product`;
+
 CREATE TABLE `sp_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `p_name` varchar(100) NOT NULL COMMENT '名称',
@@ -528,20 +558,23 @@ CREATE TABLE `sp_product` (
   `p_format` varchar(100) DEFAULT NULL COMMENT '规格',
   `brand` varchar(100) DEFAULT NULL COMMENT '品牌',
   `p_desc` text COMMENT '详细说明',
-  `thumb` varchar(200) DEFAULT NULL COMMENT '缩略图',
+  `smeta` varchar(200) DEFAULT NULL COMMENT '缩略图',
   `price` float NOT NULL DEFAULT '0' COMMENT '价格',
   `num` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '剩余数量',
   `total_num` int(10) unsigned DEFAULT NULL COMMENT '总数',
   `post_author` varchar(20) DEFAULT NULL COMMENT '发布人',
   `post_date` timestamp NULL DEFAULT NULL COMMENT '增加时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `sp_product` */
 
-insert  into `sp_product`(`id`,`p_name`,`p_model`,`p_format`,`brand`,`p_desc`,`thumb`,`price`,`num`,`total_num`,`post_author`,`post_date`) values (1,'asd','asd','asd','ad','sdasd','asd',11,1,1,'1',NULL);
+insert  into `sp_product`(`id`,`p_name`,`p_model`,`p_format`,`brand`,`p_desc`,`smeta`,`price`,`num`,`total_num`,`post_author`,`post_date`) values (1,'asd','asd','asd','ad','<p>sdasd</p>','asd',11,1,1,'1',NULL);
+insert  into `sp_product`(`id`,`p_name`,`p_model`,`p_format`,`brand`,`p_desc`,`smeta`,`price`,`num`,`total_num`,`post_author`,`post_date`) values (2,'11','11','11','11','<p>11</p>','{\"thumb\":\"\"}',11,11,11,'1','2015-08-27 16:57:52');
 
 /*Table structure for table `sp_role` */
+
+DROP TABLE IF EXISTS `sp_role`;
 
 CREATE TABLE `sp_role` (
   `id` smallint(6) unsigned NOT NULL AUTO_INCREMENT,
@@ -563,6 +596,8 @@ insert  into `sp_role`(`id`,`name`,`pid`,`status`,`remark`,`create_time`,`update
 
 /*Table structure for table `sp_role_user` */
 
+DROP TABLE IF EXISTS `sp_role_user`;
+
 CREATE TABLE `sp_role_user` (
   `role_id` mediumint(9) unsigned DEFAULT NULL,
   `user_id` char(32) DEFAULT NULL,
@@ -573,6 +608,8 @@ CREATE TABLE `sp_role_user` (
 /*Data for the table `sp_role_user` */
 
 /*Table structure for table `sp_slide` */
+
+DROP TABLE IF EXISTS `sp_slide`;
 
 CREATE TABLE `sp_slide` (
   `slide_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -592,6 +629,8 @@ CREATE TABLE `sp_slide` (
 
 /*Table structure for table `sp_slide_cat` */
 
+DROP TABLE IF EXISTS `sp_slide_cat`;
+
 CREATE TABLE `sp_slide_cat` (
   `cid` bigint(20) NOT NULL AUTO_INCREMENT,
   `cat_name` varchar(255) NOT NULL,
@@ -605,6 +644,8 @@ CREATE TABLE `sp_slide_cat` (
 /*Data for the table `sp_slide_cat` */
 
 /*Table structure for table `sp_term_relationships` */
+
+DROP TABLE IF EXISTS `sp_term_relationships`;
 
 CREATE TABLE `sp_term_relationships` (
   `tid` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -631,6 +672,8 @@ insert  into `sp_term_relationships`(`tid`,`object_id`,`term_id`,`listorder`,`st
 insert  into `sp_term_relationships`(`tid`,`object_id`,`term_id`,`listorder`,`status`) values (11,11,1,0,1);
 
 /*Table structure for table `sp_terms` */
+
+DROP TABLE IF EXISTS `sp_terms`;
 
 CREATE TABLE `sp_terms` (
   `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '分类id',
@@ -677,6 +720,8 @@ insert  into `sp_terms`(`term_id`,`name`,`slug`,`taxonomy`,`description`,`parent
 
 /*Table structure for table `sp_user_favorites` */
 
+DROP TABLE IF EXISTS `sp_user_favorites`;
+
 CREATE TABLE `sp_user_favorites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` bigint(20) DEFAULT NULL,
@@ -693,6 +738,8 @@ CREATE TABLE `sp_user_favorites` (
 /*Data for the table `sp_user_favorites` */
 
 /*Table structure for table `sp_users` */
+
+DROP TABLE IF EXISTS `sp_users`;
 
 CREATE TABLE `sp_users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

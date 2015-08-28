@@ -10,7 +10,7 @@ class ProductModel extends CommonModel {
 	 * p_format 规格
 	 * brand 品牌
 	 * p_desc:详细说明
-	 * pic:图片
+	 * smeta:图片
 	 * price:价格
 	 * num:剩余数量
 	 * total_num: 总数

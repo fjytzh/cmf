@@ -1,0 +1,94 @@
+<admintpl file="header"/>
+<script type="text/javascript">
+    var catid = "12";
+</script>
+<style type="text/css">
+.col-auto {
+	overflow: hidden;
+	_zoom: 1;
+	_float: left;
+	border: 1px solid #c2d1d8;
+}
+.col-right {
+	float: right;
+	width: 210px;
+	overflow: hidden;
+	margin-left: 6px;
+	border: 1px solid #c2d1d8;
+}
+
+body fieldset {
+	border: 1px solid #D8D8D8;
+	padding: 10px;
+	background-color: #FFF;
+}
+body fieldset legend {
+    background-color: #F9F9F9;
+    border: 1px solid #D8D8D8;
+    font-weight: 700;
+    padding: 3px 8px;
+}
+.list-dot{ padding-bottom:10px}
+.list-dot li,.list-dot-othors li{padding:5px 0; border-bottom:1px dotted #c6dde0; font-family:"宋体"; color:#bbb; position:relative;_height:22px}
+.list-dot li span,.list-dot-othors li span{color:#004499}
+.list-dot li a.close span,.list-dot-othors li a.close span{display:none}
+.list-dot li a.close,.list-dot-othors li a.close{ background: url("__ROOT__/statics/images/cross.png") no-repeat left 3px; display:block; width:16px; height:16px;position: absolute;outline:none;right:5px; bottom:5px}
+.list-dot li a.close:hover,.list-dot-othors li a.close:hover{background-position: left -46px}
+.list-dot-othors li{float:left;width:24%;overflow:hidden;}
+</style>
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+  <ul class="nav nav-tabs">
+     <li><a href="{:U('AdminPage/index')}">产品列表</a></li>
+     <li><a href="{:U('AdminPage/add')}">添加新产品</a></li>
+     <li class="active"><a href="#">产品出租</a></li>
+  </ul>
+  <form name="myform" id="myform"  action="{:U('AdminPage/rent_post')}" method="post" class="form-horizontal J_ajaxForms">
+  <input type="hidden" name="post[id]" value="{$post.id}">
+  <div class="col-auto">
+    <div class="table_full">
+      <table width="100%" cellpadding="2" cellspacing="2">
+            <tr>
+              <th width="80">产品名称</th>
+              <td><input type='text' name='post[p_name]' id='p_name' value='{$post.p_name}' style='width:280px' class='input' readonly='readonly'> </td>
+            </tr>
+            <tr>
+              <th width="80">出租数量 </th>
+              <td><input type='text' name='post[add_num]' id='add_num' value='' style='width:280px' class='input' > </td>
+            </tr>
+            <tr>
+              <th width="80">出租单价 </th>
+              <td><input type='text' name='post[price]' id='price' value='' style='width:280px' class='input'> </td>
+            </tr>
+            <tr>
+              <th width="80">出租折扣 </th>
+              <td><input type='text' name='post[price]' id='price' value='' style='width:280px' class='input'> </td>
+            </tr>
+            <tr>
+              <th width="80">出租总价 </th>
+              <td><input type='text' name='post[total_price]' id='total_price' value='' style='width:500px' class='input'> </td>
+            </tr>
+            <tr>
+              <th width="80">出租日期 </th>
+              <td><input type='text' name='post[date_rent]' id='day_rent' value='' style='width:280px' class='input' > </td>
+            </tr>
+            <tr>
+              <th width="80">归还日期 </th>
+              <td><input type='text' name='post[date_back]' id='day_back' value='' style='width:280px' class='input'> </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-actions">
+        <button class="btn btn_submit J_ajax_submit_btn"type="submit">提交</button>
+        <a class="btn" href="__URL__">返回</a>
+  </div>
+ </form>
+</div>
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/datePicker/datePicker.js"></script>
+
+</body>
+</html>
