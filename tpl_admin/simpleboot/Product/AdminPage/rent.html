@@ -63,7 +63,7 @@ body fieldset legend {
             </tr>
             <tr>
               <th width="80">出租折扣 </th>
-              <td><input type='text' name='post[price]' id='price' value='' style='width:280px' class='input'> </td>
+              <td><input type='text' name='post[rebate]' id='rebate' value='1.00' style='width:280px' class='input'> </td>
             </tr>
             <tr>
               <th width="80">出租总价 </th>
@@ -71,11 +71,15 @@ body fieldset legend {
             </tr>
             <tr>
               <th width="80">出租日期 </th>
-              <td><input type='text' name='post[date_rent]' id='day_rent' value='' style='width:280px' class='input' > </td>
+              <td><input type="text"  name='post[date_rent]' id='day_rent' value='' style='width:280px' class='J_date' > </td>
             </tr>
             <tr>
               <th width="80">归还日期 </th>
-              <td><input type='text' name='post[date_back]' id='day_back' value='' style='width:280px' class='input'> </td>
+              <td><input type="text"  name='post[date_back]' id='day_back' value='' style='width:280px' class='J_date'> </td>
+            </tr>
+            <tr>
+              <th width="80">出租天数 </th>
+              <td><input type="text"  name='post[date_num]' id='date_num' value='' style='width:280px' class='input'> </td>
             </tr>
         </tbody>
       </table>
@@ -88,7 +92,34 @@ body fieldset legend {
  </form>
 </div>
 <script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
-<script type="text/javascript" src="__ROOT__/statics/js/datePicker/datePicker.js"></script>
+<script type="text/javascript">
+$("#rebate,#price,#add_num").blur(function(){
+	rebate = $("#rebate").val();
+	price = $("#price").val();
+	add_num = $("#add_num").val();
+	if(rebate != '' && price!='' && add_num!=''){
+		$("#total_price").val(price * add_num * rebate);
+	}
+});
 
+$("#day_rent,#day_back").blur(function(){
+	day_rent = $("#day_rent").val();
+	day_back = $("#day_back").val();
+	if(day_rent != '' && day_back!=''){
+		$("#date_num").val(DateDiff(day_rent,  day_back));
+	}
+});
+
+//计算天数差的函数，通用  
+function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2006-12-18格式  
+    var  aDate,  oDate1,  oDate2,  iDays  
+    aDate  =  sDate1.split("-")  
+    oDate1  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0]) //转换为12-18-2006格式  
+    aDate  =  sDate2.split("-")  
+    oDate2  =  new  Date(aDate[1]  +  '-'  +  aDate[2]  +  '-'  +  aDate[0])  
+    iDays  =  parseInt(Math.abs(oDate1  -  oDate2)  /  1000  /  60  /  60  /24) //把相差的毫秒数转换为天数  
+    return  iDays  
+} 
+</script>
 </body>
 </html>

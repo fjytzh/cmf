@@ -161,14 +161,14 @@ class AdminPageAction extends AdminbaseAction {
 	}
 	
 	function rent_post(){
-		if (IS_POST) {
-			$id = intval(I('id'));
-			$post=$this->_obj->where("id=$id")->find();
+		if (IS_POST) {		
+			if($_POST['post']['day_rent'] > $_POST['post']['day_back']){
+				$tmp = $_POST['post']['day_rent'];
+				$_POST['post']['day_rent'] = $_POST['post']['day_back'];
+				$_POST['post']['day_back'] = $tmp;
+			}
 			
-			$update_arr = array();
-			$update_arr['num'] = $post['num'] + $_POST['post']['add_num'];
-			$update_arr['total_num'] = $post['total_num'] +  $_POST['post']['add_num'];
-			$result=$this->_obj->save($update_arr);
+			$result=$this->_obj->save($_POST['post']);
 			
 			if ($result !== false) {
 				//
