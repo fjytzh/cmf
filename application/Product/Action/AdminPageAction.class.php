@@ -142,7 +142,6 @@ class AdminPageAction extends AdminbaseAction {
 			$update_arr['num'] = $post['num'] + $_POST['post']['add_num'];
 			$update_arr['total_num'] = $post['total_num'] +  $_POST['post']['add_num'];
 			$result=$this->_obj->save($update_arr);
-			
 			if ($result !== false) {
 				//
 				$this->success("保存成功！");
@@ -161,19 +160,19 @@ class AdminPageAction extends AdminbaseAction {
 	}
 	
 	function rent_post(){
-		if (IS_POST) {		
+		if (IS_POST) {
+			$rent_obj = D("Rent");
 			if($_POST['post']['day_rent'] > $_POST['post']['day_back']){
 				$tmp = $_POST['post']['day_rent'];
 				$_POST['post']['day_rent'] = $_POST['post']['day_back'];
 				$_POST['post']['day_back'] = $tmp;
 			}
-			
-			$result=$this->_obj->save($_POST['post']);
-			
+	
+			$result= $rent_obj->add($_POST['post']);
 			if ($result !== false) {
-				//
+				
+				
 				$this->success("保存成功！");
-				//$this->success(json_encode($_POST['meta']));
 			} else {
 				$this->error("保存失败！");
 			}

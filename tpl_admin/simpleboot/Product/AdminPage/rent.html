@@ -45,25 +45,29 @@ body fieldset legend {
      <li class="active"><a href="#">产品出租</a></li>
   </ul>
   <form name="myform" id="myform"  action="{:U('AdminPage/rent_post')}" method="post" class="form-horizontal J_ajaxForms">
-  <input type="hidden" name="post[id]" value="{$post.id}">
+  <input type="hidden" name="post[product_id]" value="{$post.id}">
   <div class="col-auto">
     <div class="table_full">
       <table width="100%" cellpadding="2" cellspacing="2">
             <tr>
               <th width="80">产品名称</th>
-              <td><input type='text' name='post[p_name]' id='p_name' value='{$post.p_name}' style='width:280px' class='input' readonly='readonly'> </td>
-            </tr>
-            <tr>
-              <th width="80">出租数量 </th>
-              <td><input type='text' name='post[add_num]' id='add_num' value='' style='width:280px' class='input' > </td>
+              <td><input type='text' name='post[p_name]' id='p_name' value='{$post.p_name}' style='width:280px' class='input'> </td>
             </tr>
             <tr>
               <th width="80">出租单价 </th>
-              <td><input type='text' name='post[price]' id='price' value='' style='width:280px' class='input'> </td>
+              <td><input type='text' name='post[price]' id='price' value='{$post.price}' style='width:280px' class='input'> </td>
             </tr>
             <tr>
               <th width="80">出租折扣 </th>
               <td><input type='text' name='post[rebate]' id='rebate' value='1.00' style='width:280px' class='input'> </td>
+            </tr>
+            <tr>
+              <th width="80">剩余数量 </th>
+              <td><input type='text' name='post[p_num]' id='p_num' value='{$post.num}' style='width:280px' class='input' readonly="readonly"><span id="rent_num_tip" class='form_error'></span> </td>
+            </tr>
+            <tr>
+              <th width="80">出租数量 </th>
+              <td><input type='text' name='post[rent_num]' id='rent_num' value='' style='width:280px' class='input' > </td>
             </tr>
             <tr>
               <th width="80">出租总价 </th>
@@ -71,11 +75,11 @@ body fieldset legend {
             </tr>
             <tr>
               <th width="80">出租日期 </th>
-              <td><input type="text"  name='post[date_rent]' id='day_rent' value='' style='width:280px' class='J_date' > </td>
+              <td><input type="text"  name='post[day_rent]' id='day_rent' value='' style='width:280px' class='J_date' > </td>
             </tr>
             <tr>
               <th width="80">归还日期 </th>
-              <td><input type="text"  name='post[date_back]' id='day_back' value='' style='width:280px' class='J_date'> </td>
+              <td><input type="text"  name='post[day_back]' id='day_back' value='' style='width:280px' class='J_date'> </td>
             </tr>
             <tr>
               <th width="80">出租天数 </th>
@@ -92,13 +96,22 @@ body fieldset legend {
  </form>
 </div>
 <script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
 <script type="text/javascript">
-$("#rebate,#price,#add_num").blur(function(){
+$("#rebate,#price,#rent_num").blur(function(){
+	//数量不能超过上限
+	rent_num = $("#rent_num").val();
+	p_num = $("#price").val();
+	if(rent_num > p_num){
+		$("#rent_num").val('');
+		$("#rent_num_tip").html('产品数量不足,请先补充货物');
+	}
+	//自动计算价格
 	rebate = $("#rebate").val();
 	price = $("#price").val();
-	add_num = $("#add_num").val();
-	if(rebate != '' && price!='' && add_num!=''){
-		$("#total_price").val(price * add_num * rebate);
+	rent_num = $("#rent_num").val();
+	if(rebate != '' && price!='' && rent_num!=''){
+		$("#total_price").val(price * rent_num * rebate);
 	}
 });
 
@@ -120,6 +133,128 @@ function  DateDiff(sDate1,  sDate2){    //sDate1和sDate2是2006-12-18格式
     iDays  =  parseInt(Math.abs(oDate1  -  oDate2)  /  1000  /  60  /  60  /24) //把相差的毫秒数转换为天数  
     return  iDays  
 } 
+</script>
+<script type="text/javascript"> 
+$(function () {
+	$(".J_ajax_close_btn").on('click', function (e) {
+	    e.preventDefault();
+	    Wind.use("artDialog", function () {
+	        art.dialog({
+	            id: "question",
+	            icon: "question",
+	            fixed: true,
+	            lock: true,
+	            background: "#CCCCCC",
+	            opacity: 0,
+	            content: "您确定需要关闭当前页面嘛？",
+	            ok:function(){
+					setCookie("refersh_time",1);
+					window.close();
+					return true;
+				}
+	        });
+	    });
+	});
+	/////---------------------
+	 Wind.use('validate', 'ajaxForm', 'artDialog', function () {
+			//javascript            
+	        var form = $('form.J_ajaxForms');
+	        //ie处理placeholder提交问题
+	        if ($.browser.msie) {
+	            form.find('[placeholder]').each(function () {
+	                var input = $(this);
+	                if (input.val() == input.attr('placeholder')) {
+	                    input.val('');
+	                }
+	            });
+	        }
+	        //表单验证开始
+	        form.validate({
+				//是否在获取焦点时验证
+				onfocusout:false,
+				//是否在敲击键盘时验证
+				onkeyup:false,
+				//当鼠标掉级时验证
+				onclick: false,
+	            //验证错误
+	            showErrors: function (errorMap, errorArr) {
+					//errorMap {'name':'错误信息'}
+					//errorArr [{'message':'错误信息',element:({})}]
+					try{
+						$(errorArr[0].element).focus();
+						art.dialog({
+							id:'error',
+							icon: 'error',
+							lock: true,
+							fixed: true,
+							background:"#CCCCCC",
+							opacity:0,
+							content: errorArr[0].message,
+							cancelVal: '确定',
+							cancel: function(){
+								$(errorArr[0].element).focus();
+							}
+						});
+					}catch(err){
+					}
+	            },
+	            //验证规则
+	            rules: {'post[p_name]':{required:1},'post[price]':{required:1},'post[date_num]':{required:1}},
+	            //验证未通过提示消息
+	            messages: {'post[p_name]':{required:'请输入产品名称'},'post[price]':{required:'请输入产品单价'},'post[date_num]':{required:'请输入天数'}},
+	            //给未通过验证的元素加效果,闪烁等
+	            highlight: false,
+	            //是否在获取焦点时验证
+	            onfocusout: false,
+	            //验证通过，提交表单
+	            submitHandler: function (forms) {
+	                $(forms).ajaxSubmit({
+	                    url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+	                    dataType: 'json',
+	                    beforeSubmit: function (arr, $form, options) {
+	                        
+	                    },
+	                    success: function (data, statusText, xhr, $form) {
+	                        if(data.status){
+								setCookie("refersh_time",1);
+								//添加成功
+								Wind.use("artDialog", function () {
+								    art.dialog({
+								        id: "succeed",
+								        icon: "succeed",
+								        fixed: true,
+								        lock: true,
+								        background: "#CCCCCC",
+								        opacity: 0,
+								        content: data.info,
+										button:[
+											{
+												name: '继续添加？',
+												callback:function(){
+													reloadPage(window);
+													return true;
+												},
+												focus: true
+											},{
+												name: '返回列表',
+												callback:function(){
+													location.href="__URL__";
+													return true;
+												}
+											}
+										]
+								    });
+								});
+							}else{
+								isalert(data.info);
+							}
+	                    }
+	                });
+	            }
+	        });
+	    });
+	////-------------------------
+});
 </script>
 </body>
 </html>
